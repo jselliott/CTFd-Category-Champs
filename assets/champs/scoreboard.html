@@ -16,12 +16,12 @@
     <li class="nav-item" role="presentation">
       <button
         class="nav-link {% if loop.first %}active{% endif %}"
-        id="{{ category|replace(' ', '_') }}-tab"
+        id="tab-{{ loop.index }}"
         data-bs-toggle="tab"
-        data-bs-target="#{{ category|replace(' ', '_') }}"
+        data-bs-target="#panel-{{ loop.index }}"
         type="button"
         role="tab"
-        aria-controls="{{ category|replace(' ', '_') }}"
+        aria-controls="panel-{{ loop.index }}"
         aria-selected="{{ 'true' if loop.first else 'false' }}"
       >
         {{ category }}
@@ -35,10 +35,11 @@
   {% for category, players in non_empty %}
     <div
       class="tab-pane fade {% if loop.first %}show active{% endif %}"
-      id="{{ category|replace(' ', '_') }}"
+      id="panel-{{ loop.index }}"
       role="tabpanel"
-      aria-labelledby="{{ category|replace(' ', '_') }}-tab"
+      aria-labelledby="tab-{{ loop.index }}"
     >
+      <h3>{{ category }} Top 10</h3>
       <table class="table table-striped">
         <thead>
           <tr>
