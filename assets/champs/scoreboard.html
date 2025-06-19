@@ -1,0 +1,29 @@
+{% extends "champs/template.html" %}
+
+{% block deployer_content %}
+<h2>Category Champions</h2>
+{% for category, players in standings.items() %}
+  <div class="scoreboard-category">
+    <h2>{{ category }} Top {{len(players)}}</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Team/User</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for player in players %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ player.name }}</td>
+            <td>{{ player.score }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endfor %}
+
+{% endblock %}
