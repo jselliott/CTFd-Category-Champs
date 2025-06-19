@@ -21,7 +21,7 @@ def category_champs():
     standings = {}
 
     for c in cats:
-        standings[c] = get_category_standings(count=10,category=c)
+        standings[c] = get_category_standings(count=3,category=c)
 
     return render_template("champs/scoreboard.html",
                            standings=standings)
