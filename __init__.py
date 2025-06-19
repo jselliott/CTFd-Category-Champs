@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, flash
 from CTFd.utils.decorators import (
     admins_only,
 )
-from CTFd.plugins import register_plugin_assets_directory, register_admin_plugin_menu_bar
+from CTFd.plugins import register_plugin_assets_directory, register_admin_plugin_menu_bar, register_admin_script
 from sqlalchemy.sql.expression import union_all
 from CTFd.models import Awards, Brackets, Challenges, Solves, db
 from CTFd.utils import get_config
@@ -171,3 +171,4 @@ def load(app):
     app.register_blueprint(plugin_blueprint)
     register_plugin_assets_directory(app, base_path="/plugins/champs/assets/")
     register_admin_plugin_menu_bar('Champions', '/admin/champs')
+    register_admin_script("https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")
