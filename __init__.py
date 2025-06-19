@@ -62,7 +62,7 @@ def get_category_standings(count=None, bracket_id=None, admin=False, fields=None
         )
         .join(Challenges)
         .filter(Challenges.value != 0)
-        .filter_by(Challenges.category==category)
+        .filter(Challenges.category==category)
         .group_by(Solves.account_id)
     )
 
