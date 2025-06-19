@@ -4,7 +4,12 @@
 <h2>Category Champions</h2>
 {% for category, players in standings.items() %}
   {# Collect non-empty categories #}
-  {% set non_empty = standings.items() | selectattr('1', 'truthy') | list %}
+  {% set non_empty = [] %}
+  {% for category, players in standings.items() %}
+    {% if players %}
+      {% set _ = non_empty.append((category, players)) %}
+    {% endif %}
+  {% endfor %}
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" id="scoreTabs" role="tablist">
