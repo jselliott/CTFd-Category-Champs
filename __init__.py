@@ -9,7 +9,7 @@ from CTFd.utils import get_config
 from CTFd.utils.dates import unix_time_to_utc
 from CTFd.utils.modes import get_model
 
-plugin_blueprint = Blueprint("deployer", __name__, template_folder="assets")
+plugin_blueprint = Blueprint("champs", __name__, template_folder="assets")
 
 
 @plugin_blueprint.route("/admin/champs", methods=["GET"])
