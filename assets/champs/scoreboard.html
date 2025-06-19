@@ -2,67 +2,64 @@
 
 {% block deployer_content %}
 <h2>Category Champions</h2>
+{# Collect non-empty categories #}
+{% set non_empty = [] %}
 {% for category, players in standings.items() %}
-  {# Collect non-empty categories #}
-  {% set non_empty = [] %}
-  {% for category, players in standings.items() %}
-    {% if players %}
-      {% set _ = non_empty.append((category, players)) %}
-    {% endif %}
-  {% endfor %}
-
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" id="scoreTabs" role="tablist">
-    {% for category, players in non_empty %}
-      <li class="nav-item" role="presentation">
-        <button
-          class="nav-link {% if loop.first %}active{% endif %}"
-          id="{{ category|replace(' ', '_') }}-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#{{ category|replace(' ', '_') }}"
-          type="button"
-          role="tab"
-          aria-controls="{{ category|replace(' ', '_') }}"
-          aria-selected="{{ 'true' if loop.first else 'false' }}"
-        >
-          {{ category }}
-        </button>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <!-- Tab panes -->
-  <div class="tab-content mt-3">
-    {% for category, players in non_empty %}
-      <div
-        class="tab-pane fade {% if loop.first %}show active{% endif %}"
-        id="{{ category|replace(' ', '_') }}"
-        role="tabpanel"
-        aria-labelledby="{{ category|replace(' ', '_') }}-tab"
-      >
-        <h3>{{ category }} Top 10</h3>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Team/User</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for player in players %}
-              <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ player.name }}</td>
-                <td>{{ player.score }}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    {% endfor %}
-  </div>
-
+  {% if players %}
+    {% set _ = non_empty.append((category, players)) %}
+  {% endif %}
 {% endfor %}
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" id="scoreTabs" role="tablist">
+  {% for category, players in non_empty %}
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link {% if loop.first %}active{% endif %}"
+        id="{{ category|replace(' ', '_') }}-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#{{ category|replace(' ', '_') }}"
+        type="button"
+        role="tab"
+        aria-controls="{{ category|replace(' ', '_') }}"
+        aria-selected="{{ 'true' if loop.first else 'false' }}"
+      >
+        {{ category }}
+      </button>
+    </li>
+  {% endfor %}
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content mt-3">
+  {% for category, players in non_empty %}
+    <div
+      class="tab-pane fade {% if loop.first %}show active{% endif %}"
+      id="{{ category|replace(' ', '_') }}"
+      role="tabpanel"
+      aria-labelledby="{{ category|replace(' ', '_') }}-tab"
+    >
+      <h3>{{ category }} Top 10</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Team/User</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in players %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ player.name }}</td>
+              <td>{{ player.score }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endfor %}
+</div>
 
 {% endblock %}
