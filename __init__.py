@@ -2,12 +2,13 @@ from flask import Blueprint, render_template, request, redirect, flash
 from CTFd.utils.decorators import (
     admins_only,
 )
-from CTFd.plugins import register_plugin_assets_directory, register_admin_plugin_menu_bar, register_admin_script
+from CTFd.plugins import register_plugin_assets_directory, register_admin_plugin_menu_bar
 from sqlalchemy.sql.expression import union_all
 from CTFd.models import Awards, Brackets, Challenges, Solves, db
 from CTFd.utils import get_config
 from CTFd.utils.dates import unix_time_to_utc
 from CTFd.utils.modes import get_model
+from CTFd.utils.plugins import register_admin_script
 
 plugin_blueprint = Blueprint("champs", __name__, template_folder="assets")
 
