@@ -4,7 +4,7 @@
 <h2>Category Champions</h2>
 {% for category, players in standings.items() %}
   <div class="scoreboard-category">
-    <h2>{{ category }} Top {{len(players)}}</h2>
+    <h2>{{ category }} Top {{players|length}}</h2>
     <table class="table table-striped">
       <thead>
         <tr>
